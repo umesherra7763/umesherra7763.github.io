@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Umesh Chandra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Umesh Chandra, software engineer. Python, Java, Django, Flask, REST APIs. Open to software engineering internships.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: bento board. Every piece of the resume is a flat colour tile on a mid-tone slate ground; tile size follows importance. Floating pill nav on top. */
+:root {
+  --ground: #D3D9E1;
+  --tile: #F7F8FA;
+  --ink: #12161D;
+  --ink-2: #333B47;
+  --muted: #4E5866;
+  --cobalt: #2E47D6;
+  --sky: #C2D3F3;
+  --amber: #F1C65B;
+  --on-dark: #EEF1F5;
+  --on-dark-2: #A3ADBB;
+
+  --f-wide: "Archivo", "Arial Black", "Segoe UI", sans-serif;
+  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+  --r: 24px;
+  --gap: 12px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--f-body);
+  font-variation-settings: "wdth" 100;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--ground); z-index: 40; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--ink); color: var(--amber); }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; border-radius: 8px; }
+
+.page {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 96px 40px;
+}
+
+/* ---------- floating nav ---------- */
+.nav {
+  position: fixed; z-index: 30;
+  top: calc(env(safe-area-inset-top, 0px) + 14px);
+  left: 50%; transform: translateX(-50%);
+  width: min(calc(100% - 32px), 640px);
+  display: flex; align-items: center; gap: 4px;
+  background: var(--ink); color: var(--on-dark);
+  padding: 6px; border-radius: 999px;
+}
+.nav .logo { width: 38px; height: 38px; border-radius: 50%; background: var(--amber); color: var(--ink); display: grid; place-items: center; font: 800 .8rem/1 var(--f-wide); font-variation-settings: "wdth" 125; flex: none; }
+.nav ul { list-style: none; margin: 0 auto; padding: 0; display: flex; gap: 2px; }
+.nav ul a { display: block; padding: 9px 13px; border-radius: 999px; font-size: .86rem; font-weight: 500; color: var(--on-dark-2); transition: background .2s, color .2s; }
+.nav ul a:hover, .nav ul a.on { background: #262C36; color: var(--on-dark); }
+.nav .cta { padding: 10px 16px; border-radius: 999px; background: var(--on-dark); color: var(--ink); font-weight: 600; font-size: .86rem; flex: none; transition: background .2s; }
+.nav .cta:hover { background: var(--amber); }
+@media (max-width: 620px) { .nav ul { display: none; } .nav .cta { margin-left: auto; } }
+
+/* ---------- bento ---------- */
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.t {
+  border-radius: var(--r); padding: 26px; min-width: 0;
+  background: var(--tile); color: var(--ink);
+  display: flex; flex-direction: column; gap: 14px;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.t:hover { transform: translateY(-3px); }
+.c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c4 { grid-column: span 4; }
+.r2 { grid-row: span 2; }
+.t.ink { background: var(--ink); color: var(--on-dark); }
+.t.cobalt { background: var(--cobalt); color: #FFFFFF; }
+.t.sky { background: var(--sky); }
+.t.amber { background: var(--amber); }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c3, .c4 { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .bento { grid-template-columns: minmax(0, 1fr); }
+  .c2, .c3, .c4 { grid-column: auto; }
+  .r2 { grid-row: auto; }
+  .t { padding: 22px; }
+}
+
+.eyebrow { font: 500 .72rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ink .eyebrow { color: var(--on-dark-2); }
+.cobalt .eyebrow { color: #D5DCFA; }
+.sky .eyebrow, .amber .eyebrow { color: var(--ink-2); }
+
+/* section headers sit on the ground, between boards */
+.sec { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: 72px 4px 20px; scroll-margin-top: 90px; }
+.sec h2 { margin: 0; font: 800 clamp(1.9rem, 4.6vw, 3.2rem)/.95 var(--f-wide); font-variation-settings: "wdth" 125; letter-spacing: -.02em; text-transform: uppercase; }
+.sec span { font: 500 .78rem/1 var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+/* ---------- hero tiles ---------- */
+.hero-name { justify-content: space-between; min-height: 380px; container-type: inline-size; }
+/* sized to the tile, not the window, so the longest word always fits */
+.hero-name h1 {
+  margin: 0; font: 800 clamp(2.2rem, 13.5cqi, 5rem)/.9 var(--f-wide);
+  font-variation-settings: "wdth" 118; letter-spacing: -.03em; text-transform: uppercase;
+}
+.hero-name h1 span { display: block; color: var(--amber); }
+.hero-name p { margin: 0; color: var(--on-dark-2); font-size: 1.05rem; max-width: 40ch; }
+.hero-name p b { color: var(--on-dark); font-weight: 600; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: .92rem; border: 1px solid #3A414D; color: var(--on-dark); transition: background .2s, color .2s, border-color .2s; }
+.btn:hover { border-color: var(--on-dark); }
+.btn.solid { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+.btn.solid:hover { background: var(--on-dark); border-color: var(--on-dark); }
+.btn svg { width: 16px; height: 16px; }
+
+.status-dot { display: inline-flex; align-items: center; gap: 8px; }
+.status-dot i { width: 9px; height: 9px; border-radius: 50%; background: #7CF0B0; animation: pulse 2.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .35 } }
+.big { font: 800 1.7rem/1.02 var(--f-wide); font-variation-settings: "wdth" 115; letter-spacing: -.02em; margin: auto 0 0; }
+.small { margin: 0; font-size: .9rem; opacity: .92; }
+
+.clock { font: 500 2.2rem/1 var(--f-mono); letter-spacing: -.03em; margin-top: auto; font-variant-numeric: tabular-nums; }
+
+.score { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+.score div { display: flex; flex-direction: column; gap: 4px; }
+.score b { font: 800 2.3rem/1 var(--f-wide); font-variation-settings: "wdth" 110; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.score span { font-size: .78rem; color: var(--ink-2); line-height: 1.3; }
+
+.socials { display: grid; gap: 6px; margin-top: auto; }
+.soc { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #ECEFF3; font-weight: 600; font-size: .9rem; transition: background .2s, color .2s; }
+.soc:hover { background: var(--ink); color: var(--on-dark); }
+.soc svg { width: 16px; height: 16px; flex: none; }
+
+.about-text { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.5; letter-spacing: -.01em; margin: 0; max-width: 54ch; text-wrap: pretty; }
+.about-text mark { background: var(--sky); color: var(--ink); padding: 0 .25em; border-radius: 6px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 .76rem/1 var(--f-mono); padding: 7px 10px; border-radius: 999px; background: #ECEFF3; color: var(--ink-2); }
+.amber .chip, .sky .chip { background: rgba(18, 22, 29, .09); color: var(--ink); }
+.ink .chip { background: #232934; color: var(--on-dark); }
+.cobalt .chip { background: rgba(255, 255, 255, .16); color: #FFFFFF; }
+.chip.dark { background: var(--ink); color: var(--on-dark); }
+
+/* ---------- experience ---------- */
+.job h3 { margin: 0; font: 600 1.32rem/1.25 var(--f-body); letter-spacing: -.02em; }
+.job .where { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
+.job ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--ink-2); }
+.job li { padding-left: 20px; position: relative; }
+.job li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--cobalt); }
+.job .chips { margin-top: auto; }
+.ext { font-weight: 600; color: var(--cobalt); border-bottom: 1.5px solid currentColor; white-space: nowrap; }
+.when-pill { font: 500 .72rem/1 var(--f-mono); padding: 6px 9px; border-radius: 999px; background: var(--ink); color: var(--on-dark); text-transform: none; letter-spacing: 0; white-space: nowrap; }
+
+/* ---------- projects ---------- */
+.proj h3 { margin: 0; font: 600 1.4rem/1.2 var(--f-body); letter-spacing: -.025em; text-wrap: balance; }
+.proj p { margin: 0; }
+.proj ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: .95rem; }
+.proj li { padding-left: 16px; position: relative; }
+.proj li::before { content: "→"; position: absolute; left: 0; font-size: .85em; opacity: .7; }
+.proj.ink ul { color: var(--on-dark-2); }
+.proj .chips { margin-top: auto; }
+.go { display: inline-flex; align-items: center; gap: 6px; font: 600 .8rem/1 var(--f-body); padding: 8px 12px; border-radius: 999px; background: var(--ink); color: var(--on-dark); text-transform: none; letter-spacing: 0; transition: background .2s, color .2s; }
+.go:hover { background: var(--cobalt); color: #FFFFFF; }
+.ink .go { background: var(--amber); color: var(--ink); }
+.ink .go:hover { background: var(--on-dark); }
+.diagram { border-radius: 16px; padding: 16px; background: #1B2029; }
+.diagram svg { width: 100%; height: auto; display: block; }
+.d-box { fill: #262C36; stroke: #3A414D; }
+.d-acc { fill: var(--amber); }
+.d-line { stroke: #5A6372; stroke-width: 1.2; fill: none; }
+.d-line-acc { stroke: var(--amber); stroke-width: 1.6; fill: none; stroke-dasharray: 4 5; animation: flow 1.2s linear infinite; }
+.d-t { fill: var(--on-dark); font: 500 11px var(--f-mono); }
+.d-t-ink { fill: var(--ink); font: 600 11px var(--f-mono); }
+.d-t-m { fill: var(--on-dark-2); font: 400 10px var(--f-mono); }
+@keyframes flow { to { stroke-dashoffset: -18; } }
+
+.slots { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 5px; }
+.slots i { aspect-ratio: 3 / 4; border-radius: 5px; background: #E4E8EE; max-width: 100%; }
+.slots i.f { background: var(--ink); }
+.slots i.lock { background: var(--cobalt); position: relative; }
+.slots i.lock::after { content: ""; position: absolute; inset: 35% 30%; border: 2px solid #FFFFFF; border-radius: 3px; }
+
+.sms { background: #FFFFFF; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font: 400 .78rem/1.45 var(--f-mono); color: var(--ink-2); }
+.parsed { display: flex; flex-wrap: wrap; gap: 6px; }
+.parsed span { font: 500 .72rem/1 var(--f-mono); padding: 6px 8px; border-radius: 8px; background: var(--ink); color: var(--amber); }
+.parsed span em { font-style: normal; color: var(--on-dark-2); margin-right: 4px; }
+
+.bars { display: flex; align-items: flex-end; gap: 4px; height: 64px; }
+.bars i { flex: 1; background: var(--ink); border-radius: 3px 3px 0 0; }
+.bars.after i { background: var(--cobalt); }
+.bars-wrap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 10px; }
+.bars-wrap small { display: block; font: 500 .66rem/1 var(--f-mono); color: var(--ink-2); margin-top: 6px; text-transform: uppercase; letter-spacing: .06em; }
+.bars-wrap .arrow { font: 500 1rem/1 var(--f-mono); padding-bottom: 26px; }
+
+/* ---------- skills / education ---------- */
+.list-h { margin: 0; font: 600 1.08rem/1.2 var(--f-body); letter-spacing: -.015em; }
+.gpa { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(18, 22, 29, .14); }
+.gpa b { font: 800 2.6rem/1 var(--f-wide); font-variation-settings: "wdth" 110; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.gpa span { font: 500 .72rem/1.3 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+.edu h3 { margin: 0; font: 600 1.2rem/1.3 var(--f-body); letter-spacing: -.02em; text-wrap: balance; }
+.edu p { margin: 0; color: var(--ink-2); }
+
+/* ---------- contact ---------- */
+.contact-big { min-height: 300px; justify-content: space-between; container-type: inline-size; }
+.contact-big h2 { margin: 0; font: 800 clamp(1.8rem, 8.5cqi, 3.6rem)/.92 var(--f-wide); font-variation-settings: "wdth" 125; letter-spacing: -.03em; text-transform: uppercase; max-width: 14ch; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.mail .addr { font: 500 clamp(1rem, 2.4vw, 1.35rem)/1.2 var(--f-mono); overflow-wrap: anywhere; user-select: all; }
+.copy { font: 600 .82rem/1 var(--f-body); border: 0; border-radius: 999px; padding: 10px 14px; background: #FFFFFF; color: var(--cobalt); cursor: pointer; transition: background .2s, color .2s; }
+.copy:hover { background: var(--amber); color: var(--ink); }
+.kv { display: grid; margin: auto 0 0; }
+.kv div { display: flex; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid #262C36; font-size: .9rem; }
+.kv div:last-child { border-bottom: 0; }
+.kv dt { color: var(--on-dark-2); font: 400 .74rem/1.6 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; }
+.kv dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.kv a:hover { color: var(--amber); }
+
+footer { margin: 28px 4px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font: 500 .74rem/1.5 var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+/* entrance: tiles settle in from a visible resting state */
+.bento > .t { animation: settle .7s cubic-bezier(.2,.7,.2,1) both; }
+.bento > .t:nth-child(2) { animation-delay: .05s } .bento > .t:nth-child(3) { animation-delay: .1s }
+.bento > .t:nth-child(4) { animation-delay: .15s } .bento > .t:nth-child(5) { animation-delay: .2s }
+.bento > .t:nth-child(n+6) { animation-delay: .25s }
+@keyframes settle { from { transform: translateY(12px) scale(.985); opacity: .001 } to { transform: none; opacity: 1 } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="#top" aria-label="Back to top">UC</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <a class="cta" href="#contact">Contact</a>
+</nav>
+
+<div class="page" id="top">
+
+  <!-- HERO BOARD -->
+  <div class="bento">
+    <div class="t ink c2 r2 hero-name">
+      <div class="eyebrow"><span>Software Engineer</span><span>Chennai, IN</span></div>
+      <h1>Umesh <span>Chandra</span></h1>
+      <p>I build <b>REST APIs</b>, <b>database-backed systems</b> and the <b>data pipelines</b> behind them, mostly in Python and Java.</p>
+      <div class="btns">
+        <a class="btn solid" href="#projects">View projects
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn" href="https://github.com/umesherra7763" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="t cobalt">
+      <div class="eyebrow"><span class="status-dot"><i aria-hidden="true"></i>Status</span></div>
+      <p class="big">Open to SWE internships</p>
+      <p class="small">APIs, systems and data</p>
+    </div>
+
+    <div class="t">
+      <div class="eyebrow"><span>Chennai, India</span><span>IST</span></div>
+      <div class="clock" id="clock">--:--</div>
+      <p class="small" style="color:var(--muted)">My local time</p>
+    </div>
+
+    <div class="t sky">
+      <div class="eyebrow"><span>Grades</span><span>CGPA</span></div>
+      <div class="score">
+        <div><b>8.4</b><span>IIT Madras BS</span></div>
+        <div><b>7.7</b><span>IIITDM dual degree</span></div>
+      </div>
+    </div>
+
+    <div class="t">
+      <div class="eyebrow"><span>Find me</span></div>
+      <div class="socials">
+        <a class="soc" href="https://github.com/umesherra7763" target="_blank" rel="noopener">GitHub
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="soc" href="https://www.linkedin.com/in/umesh-chandra-erra-a42078288" target="_blank" rel="noopener">LinkedIn
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a class="soc" href="https://leetcode.com/u/umesherra7/" target="_blank" rel="noopener">LeetCode
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="t c3">
+      <div class="eyebrow"><span>About</span></div>
+      <p class="about-text">Computer Science dual-degree student at <mark>IIITDM Kancheepuram</mark>, also studying Data Science at <mark>IIT Madras</mark>. I've shipped a cross-brand size recommender, a zero-trust LAN suite, a REST backend that prevents double-booking and an ML model built for hospital bed planning.</p>
+    </div>
+
+    <div class="t amber">
+      <div class="eyebrow"><span>Now learning</span></div>
+      <p class="big" style="font-size:1.35rem">LLM apps</p>
+      <div class="chips"><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">Agents</span></div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="sec" id="work"><h2>Experience</h2><span>3 roles · 2025 – 2026</span></div>
+  <div class="bento">
+    <article class="t job c2 r2">
+      <div class="eyebrow"><span>Industry</span><span class="when-pill">Aug – Sep 2026</span></div>
+      <div>
+        <h3>Technical Support Engineer</h3>
+        <p class="where">Aeza · AI fashion brand · Dynamic Sizing</p>
+      </div>
+      <ul>
+        <li>Normalized brand size charts, body measurements and garment measurements into one unified schema, with a reusable parsing pipeline to onboard new brands.</li>
+        <li>Designed an anchor-based size recommendation algorithm that maps a size the user already owns to the best-fitting size in another brand.</li>
+        <li>Hardened it against fit-measurement edge cases and inconsistent size-chart formats, keeping recommendations reliable across a wide range of Indian brands.</li>
+      </ul>
+      <div class="chips"><span class="chip">Schema design</span><span class="chip">Parsing pipeline</span><span class="chip">Recommendation algorithm</span></div>
+    </article>
+
+    <article class="t job c2">
+      <div class="eyebrow"><span>Research</span><span class="when-pill">Dec 2025 – Jan 2026</span></div>
+      <div>
+        <h3>Undergraduate Research Assistant</h3>
+        <p class="where">IIITDM Kancheepuram · Chennai</p>
+      </div>
+      <ul>
+        <li>Built a Gradient Boosting pipeline to predict hospital Length of Stay from patient records, handling the skewed target with transformations.</li>
+        <li>Deployed it as a Streamlit dashboard with real-time predictions and top contributing factors for bed allocation. <a class="ext" href="https://bed-management.streamlit.app/" target="_blank" rel="noopener">Live demo ↗</a></li>
+      </ul>
+    </article>
+
+    <article class="t job c2">
+      <div class="eyebrow"><span>Teaching</span><span class="when-pill">Feb – Apr 2026</span></div>
+      <div>
+        <h3>Teaching Assistant, Mathematics I</h3>
+        <p class="where">IIT Madras BS Program · Chennai</p>
+      </div>
+      <ul>
+        <li>TA for the foundational Calculus course. Ran doubt-clearing sessions, mentored first-level learners on problem-solving and reinforced core concepts.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="sec" id="projects"><h2>Projects</h2><span>4 builds · 2 live</span></div>
+  <div class="bento">
+    <article class="t ink proj c2 r2">
+      <div class="eyebrow"><span>Security · Networking</span><a class="go" href="https://github.com/umesherra7763/secure_lan_zero_Trust" target="_blank" rel="noopener">Repo ↗</a></div>
+      <h3>Zero-Trust LAN Collaboration Suite with Inline TLS Inspection</h3>
+      <div class="diagram" aria-hidden="true">
+        <svg viewBox="0 0 360 170">
+          <rect class="d-box" x="4" y="66" width="70" height="36" rx="8"/><text class="d-t" x="39" y="88" text-anchor="middle">client</text>
+          <path class="d-line-acc" d="M74 84 H122"/><text class="d-t-m" x="98" y="74" text-anchor="middle">mTLS</text>
+          <rect class="d-acc" x="122" y="56" width="96" height="56" rx="10"/>
+          <text class="d-t-ink" x="170" y="81" text-anchor="middle">TLS inspect</text><text class="d-t-ink" x="170" y="97" text-anchor="middle">proxy</text>
+          <path class="d-line" d="M218 84 H238 M238 22 V148 M238 22 H254 M238 64 H254 M238 106 H254 M238 148 H254"/>
+          <rect class="d-box" x="254" y="8" width="100" height="28" rx="7"/><text class="d-t" x="304" y="26" text-anchor="middle">JWT auth</text>
+          <rect class="d-box" x="254" y="50" width="100" height="28" rx="7"/><text class="d-t" x="304" y="68" text-anchor="middle">RBAC</text>
+          <rect class="d-box" x="254" y="92" width="100" height="28" rx="7"/><text class="d-t" x="304" y="110" text-anchor="middle">device trust</text>
+          <rect class="d-box" x="254" y="134" width="100" height="28" rx="7"/><text class="d-t" x="304" y="152" text-anchor="middle">DLP engine</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Video conferencing, N-1 audio mixing, screen sharing, group chat and chunked file transfer over raw Python sockets.</li>
+        <li>Inline TLS inspection proxy, JWT authentication, role-based access control and device trust scoring.</li>
+        <li>DLP engine that catches card numbers, government IDs, API keys, hardcoded secrets and private keys, with structured audit logs.</li>
+      </ul>
+      <div class="chips"><span class="chip">Python</span><span class="chip">Sockets</span><span class="chip">TLS/mTLS</span><span class="chip">JWT</span><span class="chip">RBAC</span><span class="chip">DLP</span></div>
+    </article>
+
+    <article class="t proj c2">
+      <div class="eyebrow"><span>Backend · REST API</span><a class="go" href="https://vehicle-pyqg.onrender.com/" target="_blank" rel="noopener">Live ↗</a></div>
+      <h3>Smart Parking Management System</h3>
+      <div class="slots" aria-hidden="true">
+        <i class="f"></i><i></i><i class="f"></i><i class="lock"></i><i></i><i class="f"></i><i class="f"></i><i></i>
+      </div>
+      <ul>
+        <li>Normalized schema for users, vehicles and slots, with transaction-level locking so concurrent requests can't double-book.</li>
+        <li>DRF APIs with ModelSerializer validation and token auth; deployed on Render behind Gunicorn.</li>
+      </ul>
+      <div class="chips"><span class="chip">Flask</span><span class="chip">DRF</span><span class="chip">SQLAlchemy</span><span class="chip">Gunicorn</span></div>
+    </article>
+
+    <article class="t sky proj">
+      <div class="eyebrow"><span>ML · Health</span><a class="go" href="https://bed-management.streamlit.app/" target="_blank" rel="noopener">Live ↗</a></div>
+      <h3>Length-of-Stay Predictor</h3>
+      <div class="bars-wrap" aria-hidden="true">
+        <div><div class="bars"><i style="height:100%"></i><i style="height:78%"></i><i style="height:48%"></i><i style="height:28%"></i><i style="height:16%"></i><i style="height:9%"></i></div><small>raw</small></div>
+        <span class="arrow">→</span>
+        <div><div class="bars after"><i style="height:22%"></i><i style="height:58%"></i><i style="height:96%"></i><i style="height:90%"></i><i style="height:52%"></i><i style="height:20%"></i></div><small>transformed</small></div>
+      </div>
+      <p style="font-size:.92rem">Gradient Boosting on patient records, served as a Streamlit dashboard for bed planning.</p>
+    </article>
+
+    <article class="t amber proj">
+      <div class="eyebrow"><span>Android · Data</span></div>
+      <h3>SmartSpend</h3>
+      <div class="sms" aria-hidden="true">Rs.450 debited at SWIGGY via UPI</div>
+      <div class="parsed" aria-hidden="true"><span><em>amt</em>450</span><span><em>to</em>Swiggy</span><span><em>cat</em>Food</span></div>
+      <p style="font-size:.92rem">Java app with an SMS listener and rule-based parsing, plus a Python pipeline for spending trends.</p>
+    </article>
+  </div>
+
+  <!-- TOOLKIT -->
+  <div class="sec" id="toolkit"><h2>Toolkit</h2><span>What I work with</span></div>
+  <div class="bento">
+    <div class="t">
+      <h3 class="list-h">Languages</h3>
+      <div class="chips"><span class="chip dark">Python</span><span class="chip dark">Java</span><span class="chip">C++</span><span class="chip">SQL</span><span class="chip">JavaScript</span></div>
+    </div>
+    <div class="t">
+      <h3 class="list-h">Backend &amp; Web</h3>
+      <div class="chips"><span class="chip dark">Django</span><span class="chip dark">DRF</span><span class="chip">Flask</span><span class="chip">REST API design</span><span class="chip">Node.js (basic)</span></div>
+    </div>
+    <div class="t">
+      <h3 class="list-h">Tools</h3>
+      <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Linux</span><span class="chip">Postman</span><span class="chip">VS Code</span><span class="chip">IntelliJ IDEA</span></div>
+    </div>
+    <div class="t sky">
+      <h3 class="list-h">Familiar with</h3>
+      <div class="chips"><span class="chip">Docker</span><span class="chip">AWS basics</span><span class="chip">Kafka</span><span class="chip">Redis</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">React Native</span></div>
+      <p class="small" style="margin-top:auto;color:var(--ink-2)">Coursework and tutorial level</p>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="sec" id="education"><h2>Education</h2><span>2 programs in parallel</span></div>
+  <div class="bento">
+    <div class="t edu c2">
+      <div class="eyebrow"><span>Aug 2023 – Jul 2028</span><span>Chennai</span></div>
+      <h3>Indian Institute of Information Technology, Design and Manufacturing Kancheepuram</h3>
+      <p>Dual Degree (B.Tech + M.Tech), Computer Science</p>
+      <div class="gpa"><span>CGPA</span><b>7.7</b></div>
+    </div>
+    <div class="t edu sky c2">
+      <div class="eyebrow"><span>Aug 2023 – Present</span><span>Chennai</span></div>
+      <h3>Indian Institute of Technology Madras</h3>
+      <p>BS in Data Science and Applications (Diploma level)</p>
+      <div class="gpa"><span>CGPA</span><b>8.4</b></div>
+    </div>
+    <div class="t c4">
+      <div class="eyebrow"><span>Relevant coursework</span><span>13 courses</span></div>
+      <div class="chips">
+        <span class="chip">Data Structures &amp; Algorithms</span><span class="chip">Operating Systems</span><span class="chip">Computer Networks</span><span class="chip">DBMS</span><span class="chip">Network System Design</span><span class="chip">Information Security</span><span class="chip">Malware Analysis</span><span class="chip">Cloud Computing</span><span class="chip">Internet of Things</span><span class="chip">OOP</span><span class="chip">Compiler Design</span><span class="chip">Deep Learning</span><span class="chip">Pattern Recognition in ML</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="sec" id="contact"><h2>Contact</h2><span>Say hello</span></div>
+  <div class="bento">
+    <div class="t cobalt c3 contact-big">
+      <div class="eyebrow"><span>Hiring for an intern?</span></div>
+      <h2>Let's build something.</h2>
+      <div class="mail">
+        <span class="addr" id="email">erraumesh77@gmail.com</span>
+        <button class="copy" id="copy-email" type="button">Copy email</button>
+      </div>
+    </div>
+    <div class="t ink">
+      <div class="eyebrow"><span>Details</span></div>
+      <dl class="kv">
+        <div><dt>Phone</dt><dd>+91 63047 36585</dd></div>
+        <div><dt>Based</dt><dd>Chennai, IN</dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/umesh-chandra-erra-a42078288" target="_blank" rel="noopener">Profile ↗</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/umesherra7763" target="_blank" rel="noopener">umesherra7763 ↗</a></dd></div>
+        <div><dt>LeetCode</dt><dd><a href="https://leetcode.com/u/umesherra7/" target="_blank" rel="noopener">umesherra7 ↗</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <footer><span>© 2026 Umesh Chandra</span><a href="#top">Back to top ↑</a></footer>
+</div>
+
+<script>
+(function () {
+  var clock = document.getElementById('clock');
+  function tick() {
+    try {
+      clock.textContent = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }).format(new Date());
+    } catch (e) { clock.textContent = 'UTC+5:30'; }
+  }
+  tick(); setInterval(tick, 15000);
+
+  var copyBtn = document.getElementById('copy-email');
+  var email = document.getElementById('email');
+  copyBtn.addEventListener('click', function () {
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(email);
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      copyBtn.textContent = 'Selected';
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email.textContent).then(function () {
+        copyBtn.textContent = 'Copied';
+        setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1600);
+      }, fallback);
+    } else { fallback(); }
+  });
+
+  if (!('IntersectionObserver' in window)) return;
+  var links = document.querySelectorAll('.nav ul a');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('.sec[id]').forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
